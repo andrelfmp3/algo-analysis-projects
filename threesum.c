@@ -51,7 +51,7 @@ void IntercalaSemSentinela(int A[], int inicio, int meio, int fim, int n) {
     int B[fim+1];
 
     for (int i = inicio; i <= meio; i++) {
-       B[i] = A[i]; 
+        B[i] = A[i]; 
     }
 
     for (int j = meio+1; j <= fim; j++) {
