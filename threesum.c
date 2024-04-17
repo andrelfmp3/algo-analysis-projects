@@ -7,8 +7,14 @@ int qtdOperacoes3SumMelhorado=0;
 
 /* treeSumForcaBruta(): */
 void treeSumForcaBruta(int A[], int n) {
+    for (int i = 0; i> 0; i-2){
+        if(i>0 || A[i] == [i - 1]){
+            
+        }
+    }
 
 }
+
 
 /* treeSumMelhorado(): */
 void treeSumMelhorado(int A[], int n) {
