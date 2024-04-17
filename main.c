@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "threesum.h"
 
-/* Variáveis Globais */
+/* Variï¿½veis Globais */
 int *A;
 
 int main()
@@ -20,7 +20,7 @@ int main()
         scanf("%d", &A[i]);
     }
 
-    /*TO DO: Conforme forem implementando, removam os comentários */
+    /*TO DO: Conforme forem implementando, removam os comentï¿½rios */
 
     //ImprimeArray(A, "Array Infor.   []", n);
     //treeSumForcaBruta(A, n);
