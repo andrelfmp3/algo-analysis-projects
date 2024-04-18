@@ -7,30 +7,31 @@ int qtdOperacoes3SumMelhorado=0;
 
 /* treeSumForcaBruta(): */
 void treeSumForcaBruta(int A[], int n) {
-    int cont = 0; 
-    int **sum = NULL;
+    int cont = 0;  // Inicializa um contador para acompanhar o número de combinações encontradas
+    int **sum = NULL;  // Inicializa um ponteiro para ponteiro para armazenar as combinações
 
-    for(int i = 0; i < n-2; i ++){
-
-        for(int j = i +1; j < n - 1; j++){
-
-            for(int k = j+1; k < n; k++){
-
-                if (cont > 0){
-                
-                sum = (int **)realloc(sum, (cont + 1) * sizeof(int *));
-                sum[cont ]= (int *) malloc (sizeof(int )*3);
-                sum[cont][0] = A [i];
-                sum[cont][1] = A [j];
-                sum[cont][2] = A [k];
-                }
-                else if ( 0 == cont){
-                sum = (int **)realloc(sum, (cont + 1) * sizeof(int *));
-                sum[cont ]= (int *) malloc (sizeof(int )*3);
-                sum[cont][0] = A [i];
-                sum[cont][1] = A [j];
-                sum[cont][2] = A [k];
-                cont++; 
+    // Loop sobre os elementos do array para gerar todas as combinações possíveis
+    for(int i = 0; i < n-2; i ++) {
+        for(int j = i +1; j < n - 1; j++) {
+            for(int k = j+1; k < n; k++) {
+                // Verifica se já foram encontradas combinações antes de realocar memória
+                if (cont > 0) {
+                    // Realoca memória para adicionar espaço para outra combinação
+                    sum = (int **)realloc(sum, (cont + 1) * sizeof(int *));
+                    // Aloca memória para armazenar os elementos da nova combinação
+                    sum[cont] = (int *) malloc (sizeof(int) * 3);
+                    // Armazena os elementos da combinação no array
+                    sum[cont][0] = A[i];
+                    sum[cont][1] = A[j];
+                    sum[cont][2] = A[k];
+                } else if (0 == cont) {
+                    // Se esta é a primeira combinação, aloca memória sem realocar
+                    sum = (int **)realloc(sum, (cont + 1) * sizeof(int *));
+                    sum[cont] = (int *) malloc (sizeof(int) * 3);
+                    sum[cont][0] = A[i];
+                    sum[cont][1] = A[j];
+                    sum[cont][2] = A[k];
+                    cont++;  // Incrementa o contador para indicar que uma combinação foi encontrada
                 }
             }
         }
