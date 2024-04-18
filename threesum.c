@@ -14,6 +14,10 @@ void treeSumForcaBruta(int A[], int n) {
     for(int i = 0; i < n-2; i ++) {
         for(int j = i +1; j < n - 1; j++) {
             for(int k = j+1; k < n; k++) {
+                if (A[i] + A[j] + A[k] != 0) {
+                    continue;
+                }
+
                 // Verifica se já foram encontradas combinações antes de realocar memória
                 if (cont > 0) {
                     // Realoca memória para adicionar espaço para outra combinação
@@ -36,6 +40,22 @@ void treeSumForcaBruta(int A[], int n) {
             }
         }
     }
+    
+    // imprimir as combinações possíveis
+    for (int i = 0; i < cont; i++) {
+
+        printf("\n%d Tripla encontrada: ", i+1);
+        printf("[");
+        for (int j = 0; j < 3; j++) {
+            printf("%d", sum[cont][i]);
+            if (j < 2) {
+                printf(",");
+            }
+        }
+        printf("]");
+    }
+
+    printf("\nTotal Triplas Encontradas pela Forca Bruta: %d\n", cont);
 }
 
 
