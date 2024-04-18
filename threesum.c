@@ -8,11 +8,30 @@ int qtdOperacoes3SumMelhorado=0;
 /* treeSumForcaBruta(): */
 void treeSumForcaBruta(int A[], int n) {
     int cont = 0; 
-    int sum;
+    int **sum = NULL;
 
     for(int i = 0; i < n-2; i ++){
+
         for(int j = i +1; j < n - 1; j++){
+
             for(int k = j+1; k < n; k++){
+
+                if (cont > 0){
+                
+                sum = (int **)realloc(sum, (cont + 1) * sizeof(int *));
+                sum[cont ]= (int *) malloc (sizeof(int )*3);
+                sum[cont][0] = A [i];
+                sum[cont][1] = A [j];
+                sum[cont][2] = A [k];
+                }
+                else if ( 0 == cont){
+                sum = (int **)realloc(sum, (cont + 1) * sizeof(int *));
+                sum[cont ]= (int *) malloc (sizeof(int )*3);
+                sum[cont][0] = A [i];
+                sum[cont][1] = A [j];
+                sum[cont][2] = A [k];
+                cont++; 
+                }
             }
         }
     }
