@@ -11,12 +11,16 @@ void treeSumForcaBruta(int A[], int n) {
     int **sum = NULL;  // Inicializa um ponteiro para ponteiro para armazenar as combinações
 
     // Loop sobre os elementos do array para gerar todas as combinações possíveis
-    for(int i = 0; i < n-2; i ++) {
-        for(int j = i +1; j < n - 1; j++) {
-            for(int k = j+1; k < n; k++) {
-                if (A[i] + A[j] + A[k] != 0) {
+    for(int i = 0; i < n; i ++) { // i vai passar por todos valores de 0 a n para varrer cada elemento e realizar as combinações
+        for(int j = i+1; j < n-1; j++) { // j vai se limitar entre o valor i atual +1 até o valor de n-1 para que não haja repetições das combinações (matemática nn sei)
+            for(int k = j+1; k < n; k++) { // k vai passar por todos valores de j+1 até n
+
+                int soma = A[i]+A[j]+A[k]; // autoexplicativo
+                if (soma != 0) { // caso a tripla atual não some 0 passamos para o próximo laço.
                     continue;
                 }
+
+                // caso a soma da tripla atual seja 0 adicionamos ao array sum
 
                 // Verifica se já foram encontradas combinações antes de realocar memória
                 if (cont > 0) {
@@ -28,6 +32,7 @@ void treeSumForcaBruta(int A[], int n) {
                     sum[cont][0] = A[i];
                     sum[cont][1] = A[j];
                     sum[cont][2] = A[k];
+                    cont++;
                 } else if (0 == cont) {
                     // Se esta é a primeira combinação, aloca memória sem realocar
                     sum = (int **)realloc(sum, (cont + 1) * sizeof(int *));
@@ -40,14 +45,14 @@ void treeSumForcaBruta(int A[], int n) {
             }
         }
     }
-    
+   
     // imprimir as combinações possíveis
     for (int i = 0; i < cont; i++) {
 
         printf("\n%d Tripla encontrada: ", i+1);
         printf("[");
         for (int j = 0; j < 3; j++) {
-            printf("%d", sum[cont][i]);
+            printf("%d", sum[i][j]);
             if (j < 2) {
                 printf(",");
             }
