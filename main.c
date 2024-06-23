@@ -24,7 +24,7 @@ int main()
 
     ImprimeArray(A, "Array Infor.   []", n);
     treeSumForcaBruta(A, n);
-    //treeSumMelhorado(A, n);
+    treeSumMelhorado(A, n);
 
     //ImprimeQtdOperacoes();
 

@@ -7,7 +7,7 @@ int qtdOperacoes3SumMelhorado=0;
 
 /* treeSumForcaBruta(): */
 void treeSumForcaBruta(int A[], int n) {
-    int cont = 0;  // Inicializa um contador para acompanhar o número de combinações encontradas
+    int contBrute = 0;  // Inicializa um contador para acompanhar o número de combinações encontradas
 
     // Loop sobre os elementos do array para gerar todas as combinações possíveis
     for(int i = 0; i < n; i ++) { // i vai passar por todos valores de 0 a n para varrer cada elemento e realizar as combinações
@@ -22,22 +22,40 @@ void treeSumForcaBruta(int A[], int n) {
 
 		// caso a soma da tripla atual seja 0 imprimimos a tripla encontrada
                 
-		printf("\n%d Tripla encontrada: ", cont+1);
+		printf("\n%d Tripla encontrada: ", contBrute+1);
 		printf("[%d,%d,%d]", A[i], A[j], A[k]);
 		
-               	cont++;  // Incrementa o contador para indicar que uma combinação foi encontrada
+               	contBrute++;  // Incrementa o contador para indicar que uma combinação foi encontrada
                 }
             }
         } 
 
-    printf("\nTotal Triplas Encontradas pela Forca Bruta: %d\n", cont);
+    printf("\nTotal Triplas Encontradas pela Forca Bruta: %d\n", contBrute);
 }
 
 
 /* treeSumMelhorado(): */
 void treeSumMelhorado(int A[], int n) {
+    printf("\n ---3SUM - Melhorado:--- \n");
+    MergeSortRecursivo(A, 0, n - 1, n); // Ordena 
+    ImprimeArray(A, "Array Ord.   [] = ", n); 
+    int contMelhor = 0; // Contador para o número de triplas encontradas
 
+    for (int i = 0; i < n - 2; i++) { // Percorre todo array
+        for (int j = i + 1; j < n - 1; j++) { // Percorre uma casa na frente
+            int k = BuscaBinaria((A[i] + A[j]) * -1, A, j + 1, n - 1); 
+            // Calcula o terceiro elemento necessário para formar uma tripla que soma zero
+            // Multiplicar por -1 para transformar a soma A[i] + A[j] em seu complemento negativo.
+            if (k >= 0) {
+                contMelhor++;
+                printf("%d Tripla Encontrada: [%d, %d, %d]\n", contMelhor, A[i], A[j], A[k]);
+            }
+        }
+    }
 }
+
+
+
 
 /* BuscaBinaria(): */
 int BuscaBinaria (int x, int A[], int inicio, int fim)
@@ -62,49 +80,50 @@ void MergeSortRecursivo(int A[], int inicio, int fim, int n)
 {
     if (inicio < fim) {
         int meio = (inicio + fim) / 2;
-        ImprimeArray(A, "Array Desord. -" , n);
         MergeSortRecursivo(A, inicio, meio, n);
         MergeSortRecursivo(A, meio+1, fim, n);
         IntercalaSemSentinela(A, inicio, meio, fim, n);
-        ImprimeArray(A, "Array Ord. -", n);
     }
 }
 
 /* IntercalaSemSentinela(): */
 void IntercalaSemSentinela(int A[], int inicio, int meio, int fim, int n) {
-    int B[fim+1];
 
-    for (int i = inicio; i <= meio; i++) {
-        B[i] = A[i]; 
+    int B[n]; 
+
+    int i = inicio; 
+    int j = meio + 1; 
+    int k = inicio; 
+
+    for (int p = inicio; p <= fim; p++) {
+        B[p] = A[p];
     }
 
-    for (int j = meio+1; j <= fim; j++) {
-        B[fim+meio+1-j] = A[j];
-    }
-
-    int i = inicio;
-    int j = meio;
-
-    for (int k = inicio; k <= fim; k++) {
+    while (i <= meio && j <= fim) {
         if (B[i] <= B[j]) {
             A[k] = B[i];
             i++;
         } else {
             A[k] = B[j];
-            j--;
+            j++;
         }
+        k++;
     }
 
+    while (i <= meio) {
+        A[k] = B[i];
+        i++;
+        k++;
+    }
 }
 
 /* ImprimeArray(): */
-void ImprimeArray(int A[], char Msg[], int n)
-{
-    printf("\n%s", Msg);
-
-    for(int i = 0; i < n; i++) {
-        printf(" %d ", A[i]);
+void ImprimeArray(int A[], char Msg[], int n) {
+    printf("\n%s =  ", Msg);
+    for (int i = 0; i < n; i++) {
+    printf("%d ", A[i]);
     }
+    printf("\n");
 }
 
 /* ImprimeQtdOperacoes():  */
