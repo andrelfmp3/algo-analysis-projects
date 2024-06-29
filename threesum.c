@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "threesum.h"
 
-int qtdOperacoes3SumFB=0;
-int qtdOperacoes3SumMelhorado=0;
+int qtdOperacoes3SumFB = 0;
+int qtdOperacoes3SumMelhorado = 0;
 
 /* treeSumForcaBruta(): */
 void treeSumForcaBruta(int A[], int n) {
@@ -15,6 +15,7 @@ void treeSumForcaBruta(int A[], int n) {
             for(int k = j+1; k < n; k++) { // k vai passar por todos valores de j+1 até n
 
                 int soma = A[i]+A[j]+A[k]; // variável soma recebe a tripla atual
+                qtdOperacoes3SumFB++; // incrementa qtd de operaçoes
 
                 if (soma != 0) { // caso a tripla atual não some 0 passamos para o próximo laço.
                     continue;
@@ -44,6 +45,7 @@ void treeSumMelhorado(int A[], int n) {
     for (int i = 0; i < n - 2; i++) { // Percorre todo array
         for (int j = i + 1; j < n - 1; j++) { // Percorre uma casa na frente
             int k = BuscaBinaria((A[i] + A[j]) * -1, A, j + 1, n - 1); 
+            qtdOperacoes3SumMelhorado++; // Tncrementa operações do 3sum melhorado
             // Calcula o terceiro elemento necessário para formar uma tripla que soma zero
             // Multiplicar por -1 para transformar a soma A[i] + A[j] em seu complemento negativo.
             if (k >= 0) {
@@ -127,7 +129,8 @@ void ImprimeArray(int A[], char Msg[], int n) {
 }
 
 /* ImprimeQtdOperacoes():  */
-void ImprimeQtdOperacoes()
-{
-
+void ImprimeQtdOperacoes() {
+    printf("Quantidade de Operacoes - 3SUM - Forca Bruta: %d\n", qtdOperacoes3SumFB);
+    printf("Quantidade de Operacoes - 3SUM - Melhorado: %d", qtdOperacoes3SumMelhorado); //dando 21 e não 45. arrumar.
+    printf("\n\n"); // apenas para alinhar leitura final
 }
