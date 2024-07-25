@@ -1,2 +1,2 @@
-# 3sum-exercise
+Projetos desenvolvidos em grupo para projeto e análise de algoritmos
  
